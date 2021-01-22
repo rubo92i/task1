@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
-@RequestMapping("/ingredient")
+@RestController
+@RequestMapping("/api/ingredient")
 public class IngredientController {
 
 

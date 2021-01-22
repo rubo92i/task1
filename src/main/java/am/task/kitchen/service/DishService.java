@@ -1,10 +1,10 @@
 package am.task.kitchen.service;
 
 import am.task.kitchen.model.Dish;
-import am.task.kitchen.model.Ingredient;
+import am.task.kitchen.model.exception.NotAcceptableException;
+import am.task.kitchen.model.exception.NotFoundException;
 
 import java.util.List;
-import java.util.Set;
 
 public interface DishService {
 
@@ -12,4 +12,5 @@ public interface DishService {
 
     List<Dish> getPossibleByIngredients();
 
+    Dish makeDish(long id) throws NotFoundException, NotAcceptableException;
 }

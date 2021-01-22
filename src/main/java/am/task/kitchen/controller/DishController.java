@@ -3,6 +3,8 @@ package am.task.kitchen.controller;
 
 import am.task.kitchen.model.Dish;
 import am.task.kitchen.model.Ingredient;
+import am.task.kitchen.model.exception.NotAcceptableException;
+import am.task.kitchen.model.exception.NotFoundException;
 import am.task.kitchen.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/dish")
+@RequestMapping("/api/dish")
 public class DishController {
 
     @Autowired
@@ -34,6 +36,20 @@ public class DishController {
     public ResponseEntity<List<Dish>> getPossibleByIngredients() {
         List<Dish> dishes = dishService.getPossibleByIngredients();
         return ResponseEntity.ok(dishes);
+    }
+
+
+    @RolesAllowed("ROLE_MANAGER")
+    @GetMapping("/{id}/make")
+    public ResponseEntity getPossibleByIngredients(@PathVariable long id) {
+        try {
+            Dish dish = dishService.makeDish(id);
+            return ResponseEntity.ok(dish);
+        } catch (NotFoundException e) {
+           return ResponseEntity.status(400).body("dish not found");
+        } catch (NotAcceptableException e) {
+            return ResponseEntity.status(406).body("no such ingredients");
+        }
     }
 
 

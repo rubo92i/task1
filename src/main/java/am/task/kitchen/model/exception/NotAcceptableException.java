@@ -3,9 +3,9 @@ package am.task.kitchen.model.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class AccessDeniedException extends Exception {
+public class NotAcceptableException extends Exception {
 
-    public AccessDeniedException(String message) {
+    public NotAcceptableException(String message) {
         super(message);
     }
 

@@ -2,6 +2,8 @@ package am.task.kitchen.service.impl;
 
 import am.task.kitchen.model.Dish;
 import am.task.kitchen.model.Ingredient;
+import am.task.kitchen.model.exception.NotAcceptableException;
+import am.task.kitchen.model.exception.NotFoundException;
 import am.task.kitchen.repository.DishRepository;
 import am.task.kitchen.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class DishServiceIImpl implements DishService {
@@ -26,8 +27,21 @@ public class DishServiceIImpl implements DishService {
 
     @Override
     public List<Dish> getPossibleByIngredients() {
-      
-        return  new ArrayList<>();
+        return dishRepository.getAllPossibleDishes();
+    }
+
+    @Override
+    @Transactional
+    public Dish makeDish(long id) throws NotFoundException, NotAcceptableException {
+        Dish dish = dishRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("wrong_id"));
+        for (Ingredient ingredient : dish.getIngredients()) {
+            if (ingredient.getCount() <= 0) {
+                throw new NotAcceptableException("no such ingredients");
+            }
+            ingredient.setCount(ingredient.getCount() - 1);
+        }
+        return dish;
     }
 
 }
