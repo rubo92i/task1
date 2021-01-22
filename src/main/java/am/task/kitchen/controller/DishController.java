@@ -40,7 +40,7 @@ public class DishController {
 
 
     @RolesAllowed("ROLE_MANAGER")
-    @GetMapping("/{id}/make")
+    @PatchMapping("/{id}/make")
     public ResponseEntity getPossibleByIngredients(@PathVariable long id) {
         try {
             Dish dish = dishService.makeDish(id);
