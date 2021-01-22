@@ -26,10 +26,9 @@ public class DishServiceIImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getPossibleByIngredients() {
-
-
-        return new ArrayList<>();
+    public List<Dish> getPossibleByIngredients(Set<Ingredient> ingredients) {
+      
+        return  new ArrayList<>();
     }
 
 }
