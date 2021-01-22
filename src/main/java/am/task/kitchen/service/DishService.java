@@ -10,7 +10,7 @@ public interface DishService {
 
     Dish add(Dish dish);
 
-    List<Dish> getPossibleByIngredients();
+    List<Dish> getPossible();
 
     Dish makeDish(long id) throws NotFoundException, NotAcceptableException;
 }

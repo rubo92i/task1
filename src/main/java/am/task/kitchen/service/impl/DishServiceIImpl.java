@@ -26,7 +26,7 @@ public class DishServiceIImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getPossibleByIngredients() {
+    public List<Dish> getPossible() {
         return dishRepository.getAllPossibleDishes();
     }
 

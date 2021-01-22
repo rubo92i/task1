@@ -2,7 +2,6 @@ package am.task.kitchen.controller;
 
 
 import am.task.kitchen.model.Dish;
-import am.task.kitchen.model.Ingredient;
 import am.task.kitchen.model.exception.NotAcceptableException;
 import am.task.kitchen.model.exception.NotFoundException;
 import am.task.kitchen.service.DishService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/dish")
@@ -32,9 +30,9 @@ public class DishController {
 
 
     @RolesAllowed("ROLE_MANAGER")
-    @GetMapping("/get-possible-by-ingredients")
-    public ResponseEntity<List<Dish>> getPossibleByIngredients() {
-        List<Dish> dishes = dishService.getPossibleByIngredients();
+    @GetMapping("/get-possible")
+    public ResponseEntity<List<Dish>> getPossible() {
+        List<Dish> dishes = dishService.getPossible();
         return ResponseEntity.ok(dishes);
     }
 
