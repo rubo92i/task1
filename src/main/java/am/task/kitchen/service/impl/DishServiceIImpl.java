@@ -5,6 +5,7 @@ import am.task.kitchen.model.Ingredient;
 import am.task.kitchen.model.exception.NotAcceptableException;
 import am.task.kitchen.model.exception.NotFoundException;
 import am.task.kitchen.repository.DishRepository;
+import am.task.kitchen.repository.IngredientRepository;
 import am.task.kitchen.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,19 @@ public class DishServiceIImpl implements DishService {
     @Autowired
     private DishRepository dishRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
     @Override
     @Transactional
-    public Dish add(Dish dish) {
+    public Dish add(Dish dish) throws NotFoundException {
+        List<Ingredient> fromDb = new ArrayList<>();
+        for (Ingredient ingredient : dish.getIngredients()) {
+            Ingredient entity = ingredientRepository.findById(ingredient.getId())
+                    .orElseThrow(()->new NotFoundException("selected wrong ingredients"));
+                fromDb.add(entity);
+        }
+        dish.setIngredients(fromDb);
         return dishRepository.save(dish);
     }
 

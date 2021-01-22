@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DishService {
 
-    Dish add(Dish dish);
+    Dish add(Dish dish) throws NotFoundException;
 
     List<Dish> getPossible();
 

@@ -22,10 +22,13 @@ public class DishController {
 
     @PostMapping
     @RolesAllowed("ROLE_CHIEF")
-    // es controllerov cheief pover@ asum te vor dish@ inch ingridienta a ogtagrocum
-    public ResponseEntity<Dish> createDish(@RequestBody Dish dish) {
-        dish = dishService.add(dish);
-        return ResponseEntity.ok(dish);
+    public ResponseEntity createDish(@RequestBody Dish dish) {
+        try {
+            dish = dishService.add(dish);
+            return ResponseEntity.ok(dish);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(404).body("Selected ingredients not found");
+        }
     }
 
 
@@ -44,7 +47,7 @@ public class DishController {
             Dish dish = dishService.makeDish(id);
             return ResponseEntity.ok(dish);
         } catch (NotFoundException e) {
-           return ResponseEntity.status(400).body("dish not found");
+            return ResponseEntity.status(400).body("dish not found");
         } catch (NotAcceptableException e) {
             return ResponseEntity.status(406).body("no such ingredients");
         }
