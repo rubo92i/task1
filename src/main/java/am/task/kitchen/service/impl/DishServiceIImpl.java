@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class DishServiceIImpl implements DishService {
@@ -26,7 +25,7 @@ public class DishServiceIImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getPossibleByIngredients(Set<Ingredient> ingredients) {
+    public List<Dish> getPossibleByIngredients() {
       
         return  new ArrayList<>();
     }
