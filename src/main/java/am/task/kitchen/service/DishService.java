@@ -10,6 +10,6 @@ public interface DishService {
 
     Dish add(Dish dish);
 
-    List<Dish> getPossibleByIngredients(Set<Ingredient> ingredients);
+    List<Dish> getPossibleByIngredients();
 
 }

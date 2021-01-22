@@ -26,27 +26,9 @@ public class DishServiceIImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getPossibleByIngredients(Set<Ingredient> ingredients) {
-        List<Long> ingredientIds = ingredients.stream().map(Ingredient::getId).collect(Collectors.toList());
-        List<Dish> result = new ArrayList<>();
+    public List<Dish> getPossibleByIngredients() {
 
-        //vercnum enq bazaic bolor utestner@ voronc gone 1 ingridient@ hamapatasxanum a mer ingridientneri het u qanak@ 0ic avela
-        List<Dish> possibleDishes = dishRepository.getAllByIngredients(ingredientIds);
-
-        //stugum enq ardyoq bolor ingridientneric e harcrel
-        for (Dish dish : possibleDishes) {
-            boolean canMake = true;
-            for (Ingredient ingredient : dish.getIngredients()) {
-                if (!ingredients.contains(ingredient)) {
-                    canMake = false;
-                    break;
-                }
-            }
-            if (canMake) {
-                result.add(dish);
-            }
-        }
-        return result;
+        return new ArrayList<>();
     }
 
 }

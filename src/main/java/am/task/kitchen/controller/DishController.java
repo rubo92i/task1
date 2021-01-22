@@ -30,9 +30,9 @@ public class DishController {
 
 
     @RolesAllowed("ROLE_MANAGER")
-    @PostMapping("/get-possible-by-ingredients")
-    public ResponseEntity<List<Dish>> getPossibleByIngredients(@RequestBody Set<Ingredient> ingredients) {
-        List<Dish> dishes = dishService.getPossibleByIngredients(ingredients);
+    @GetMapping("/get-possible-by-ingredients")
+    public ResponseEntity<List<Dish>> getPossibleByIngredients() {
+        List<Dish> dishes = dishService.getPossibleByIngredients();
         return ResponseEntity.ok(dishes);
     }
 
